@@ -184,7 +184,12 @@ mvn test
 ```bash
 npm --prefix frontend run build
 ```
+### 前端配置
 
+在 `frontend` 目录下创建 `.env.local` 文件：
+编辑 `.env.local` 文件，添加以下配置：
+✅ VITE_AMAP_KEY - 高德地图 Web 端 Key
+✅ VITE_AMAP_SECURITY_CODE - 高德地图安全密钥
 ## 适合作为作品集展示的点
 
 - 一个完整的 AI + 全栈项目，而不是单纯的 API demo
