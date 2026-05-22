@@ -1,28 +1,82 @@
-
 spring:
   application:
-    name: rag-demo
+    name: travel-planner-assistant
   servlet:
     multipart:
-      max-file-size: 100MB
-      max-request-size: 100MB
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+    url: ${TRAVEL_DB_URL:jdbc:mysql://127.0.0.1:3306/travel_planner?createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8&connectionCollation=utf8mb4_unicode_ci&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${TRAVEL_DB_USERNAME:root}
+    password: ${TRAVEL_DB_PASSWORD:}
+    driver-class-name: ${TRAVEL_DB_DRIVER:com.mysql.cj.jdbc.Driver}
+  data:
+    redis:
+      host: ${TRAVEL_REDIS_HOST:localhost}
+      port: ${TRAVEL_REDIS_PORT:6379}
+      password: ${TRAVEL_REDIS_PASSWORD:}
+      timeout: 5s
+
+server:
+  port: 8080
+
+logging:
+  level:
+    root: info
+    org.example.demo: debug
 
 langchain4j:
   open-ai:
     chat-model:
-      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
-      api-key: ${DASHSCOPE_API_KEY}
-      model-name: qwen3.5-plus
+      base-url: ${TRAVEL_LLM_BASE_URL:https://dashscope.aliyuncs.com/compatible-mode/v1}
+      api-key: ${TRAVEL_LLM_API_KEY:}
+      model-name: ${TRAVEL_LLM_MODEL:qwen3.5-flash}
       log-requests: true
       log-responses: true
-    streaming-chat-model:
-      base-url: https://dashscope.aliyuncs.com/compatible-mode/v1
-      api-key: ${DASHSCOPE_API_KEY}
-      model-name: qwen3.5-plus
-      log-requests: true
-      log-responses: true
-logging:
-  level:
-    dev.langchain4j: debug
-server:
-  port: 8080
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: auto
+
+travel:
+  chat-memory:
+    max-messages: 24
+    key-prefix: "travel:memory:"
+  amap:
+    base-url: ${TRAVEL_AMAP_BASE_URL:https://restapi.amap.com}
+    api-key: ${TRAVEL_AMAP_API_KEY:}
+  weather:
+    enabled: ${TRAVEL_WEATHER_ENABLED:true}
+    base-url: ${TRAVEL_WEATHER_BASE_URL:https://api.open-meteo.com}
+  unsplash:
+    base-url: ${TRAVEL_UNSPLASH_BASE_URL:https://api.unsplash.com}
+    access-key: ${TRAVEL_UNSPLASH_ACCESS_KEY:}
+  featured-destinations:
+    - "\u676D\u5DDE"
+    - "\u6210\u90FD"
+    - "\u897F\u5B89"
+    - "\u4E09\u4E9A"
+    - "\u6842\u6797"
+  interests:
+    - "\u5386\u53F2\u4EBA\u6587"
+    - "\u81EA\u7136\u98CE\u5149"
+    - "\u7F8E\u98DF\u6253\u5361"
+    - "\u6444\u5F71\u51FA\u7247"
+    - "\u4EB2\u5B50\u966A\u4F34"
+    - "\u591C\u751F\u6D3B"
+  budget-levels:
+    - "\u8F7B\u677E\u7701\u5FC3"
+    - "\u5747\u8861\u8212\u9002"
+    - "\u54C1\u8D28\u5347\u7EA7"
+  pace-options:
+    - "\u8F7B\u677E\u6162\u6E38"
+    - "\u7ECF\u5178\u5E73\u8861"
+    - "\u7D27\u51D1\u9AD8\u6548"
+  hotel-styles:
+    - "\u5E02\u533A\u4FBF\u5229"
+    - "\u5EA6\u5047\u653E\u677E"
+    - "\u7CBE\u54C1\u8BBE\u8BA1"
+    - "\u4EB2\u5B50\u53CB\u597D"
