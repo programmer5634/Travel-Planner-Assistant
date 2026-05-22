@@ -1,0 +1,97 @@
+<style>
+  .style-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: 22px; }
+  .style-card { border: 2px solid rgba(15, 23, 42, .12); border-radius: 22px; overflow: hidden; background: white; cursor: pointer; transition: .2s ease; }
+  .style-card:hover { transform: translateY(-4px); box-shadow: 0 22px 50px rgba(15, 23, 42, .16); }
+  .style-card.selected { border-color: #2563eb; box-shadow: 0 0 0 4px rgba(37, 99, 235, .14), 0 24px 54px rgba(15, 23, 42, .18); }
+  .mini { height: 340px; padding: 18px; display: grid; grid-template-columns: 34% 1fr; gap: 12px; }
+  .mini-sidebar, .mini-chat { border-radius: 16px; padding: 12px; }
+  .pill { display: inline-flex; height: 9px; border-radius: 999px; margin: 5px 4px 5px 0; }
+  .bubble { border-radius: 14px; padding: 10px; margin-top: 10px; font-size: 12px; line-height: 1.45; }
+  .style-title { padding: 16px 18px 18px; }
+  .style-title h3 { margin: 0 0 6px; font-size: 18px; }
+  .style-title p { margin: 0; color: #64748b; line-height: 1.6; }
+  .a { background: radial-gradient(circle at 20% 0%, #fef3c7, transparent 38%), linear-gradient(135deg, #f8f5eb, #e7eef9); }
+  .a .mini-sidebar { background: #183153; color: #f8fafc; }
+  .a .mini-chat { background: rgba(255,255,255,.78); border: 1px solid rgba(24,49,83,.12); }
+  .a .bubble.one { background: #f6ead1; color: #4a3418; }
+  .a .bubble.two { background: #183153; color: #fff; }
+  .b { background: linear-gradient(145deg, #061a2f, #063d42 55%, #0f766e); color: #eafffb; }
+  .b .mini-sidebar { background: rgba(255,255,255,.11); border: 1px solid rgba(255,255,255,.16); }
+  .b .mini-chat { background: rgba(7, 27, 48, .66); border: 1px solid rgba(125, 211, 252, .28); }
+  .b .bubble.one { background: rgba(45, 212, 191, .18); color: #d9fffb; }
+  .b .bubble.two { background: #ccfbf1; color: #0f172a; }
+  .c { background: linear-gradient(135deg, #fff7ed, #fef2f2 48%, #eff6ff); }
+  .c .mini-sidebar { background: #7f1d1d; color: #fff7ed; }
+  .c .mini-chat { background: #ffffff; border: 1px solid rgba(127,29,29,.14); }
+  .c .bubble.one { background: #fee2e2; color: #7f1d1d; }
+  .c .bubble.two { background: #1e3a8a; color: white; }
+  @media (max-width: 1000px) { .style-grid { grid-template-columns: 1fr; } }
+</style>
+
+<h2>毕业生就业政策助手：选择界面气质</h2>
+<p class="subtitle">请打开下方地址查看三个方向。你可以点击选择一个，也可以直接在终端回复 A/B/C 或描述你想混合的感觉。</p>
+
+<div class="style-grid">
+  <div class="style-card option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="mini a">
+      <div class="mini-sidebar">
+        <div style="font-weight:700;margin-bottom:12px;">政策档案</div>
+        <span class="pill" style="width:70%;background:#facc15"></span>
+        <span class="pill" style="width:52%;background:#dbeafe"></span>
+        <span class="pill" style="width:86%;background:#bfdbfe"></span>
+        <div style="margin-top:28px;font-size:12px;opacity:.86;line-height:1.8;">基层就业<br>求职补贴<br>创业扶持</div>
+      </div>
+      <div class="mini-chat">
+        <div style="font-size:13px;font-weight:700;color:#183153;">就业政策问答</div>
+        <div class="bubble one">我能申请求职创业补贴吗？</div>
+        <div class="bubble two">根据政策汇编，可先核对毕业年度、困难类别和申请渠道……</div>
+      </div>
+    </div>
+    <div class="style-title">
+      <h3>A. 政策档案馆</h3>
+      <p>米色纸张感 + 深蓝档案柜，沉稳、清晰，适合突出“权威资料检索”。</p>
+    </div>
+  </div>
+
+  <div class="style-card option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="mini b">
+      <div class="mini-sidebar">
+        <div style="font-weight:800;margin-bottom:12px;">就业导航仪</div>
+        <span class="pill" style="width:78%;background:#2dd4bf"></span>
+        <span class="pill" style="width:45%;background:#67e8f9"></span>
+        <span class="pill" style="width:88%;background:#a7f3d0"></span>
+        <div style="margin-top:28px;font-size:12px;opacity:.9;line-height:1.8;">政策匹配<br>材料清单<br>办理路径</div>
+      </div>
+      <div class="mini-chat">
+        <div style="font-size:13px;font-weight:800;color:#99f6e4;">AI 就业导航</div>
+        <div class="bubble one">基层项目有哪些？</div>
+        <div class="bubble two">为你按报考、服务期、优惠政策梳理如下……</div>
+      </div>
+    </div>
+    <div class="style-title">
+      <h3>B. 就业导航仪</h3>
+      <p>深色数据舱 + 青绿色高亮，更现代，像一个帮学生规划路径的智能控制台。</p>
+    </div>
+  </div>
+
+  <div class="style-card option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="mini c">
+      <div class="mini-sidebar">
+        <div style="font-weight:800;margin-bottom:12px;">政务服务</div>
+        <span class="pill" style="width:72%;background:#fecaca"></span>
+        <span class="pill" style="width:56%;background:#bfdbfe"></span>
+        <span class="pill" style="width:84%;background:#fed7aa"></span>
+        <div style="margin-top:28px;font-size:12px;opacity:.9;line-height:1.8;">政策依据<br>适用对象<br>咨询提示</div>
+      </div>
+      <div class="mini-chat">
+        <div style="font-size:13px;font-weight:800;color:#7f1d1d;">毕业生政策服务台</div>
+        <div class="bubble one">灵活就业社保补贴怎么申请？</div>
+        <div class="bubble two">可从适用对象、补贴标准、申请材料三部分查看……</div>
+      </div>
+    </div>
+    <div class="style-title">
+      <h3>C. 政务服务台</h3>
+      <p>红蓝政务色 + 暖色底，亲切但正式，适合政策咨询场景和课堂展示。</p>
+    </div>
+  </div>
+</div>
